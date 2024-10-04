@@ -1,0 +1,47 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table Customers {
+  customer_id INT
+    first_name varchar
+    last_name varchar
+    email VARCHAR
+    address VARCHAR
+    city VARCHAR
+    state VARCHAR
+    zip VARCHAR
+}
+
+Table Books {
+    book_id INT
+    title VARCHAR(255)
+    author VARCHAR(100)
+    publisher VARCHAR(100)
+    genre VARCHAR(50)
+    publication_year INT
+    price DECIMAL
+}
+
+Table Orders {
+    order_id INT
+    customer_id INT
+    order_date DATE
+    total_amount DECIMAL
+}
+
+Table Order_Items {
+  order_item_id INT
+    order_id int
+    book_id INT
+    quantity INT
+    unit_price DECIMAL
+
+}
+
+
+
+Ref:Orders.customer_id < Customers.customer_id
+
+Ref: Order_Items.order_id < Orders.order_id
+
+Ref: Order_Items.book_id < Books.book_id

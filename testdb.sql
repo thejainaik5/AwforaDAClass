@@ -109,7 +109,13 @@ INSERT INTO Customers (first_name, last_name, email, address, city, state, zip) 
 New Alison, PA 31666', 'Charleneberg', 'New York', '36179');
 INSERT INTO Customers (first_name, last_name, email, address, city, state, zip) VALUES ('Timothy Cooley', 'Williams', 'lcastillo@example.com', '1329 Kelly Curve Suite 730
 Mariabury, NM 90035', 'Jenniferburgh', 'Hawaii', '07537');
+INSERT INTO Customers (first_name, last_name, email, address, city, state) VALUES ('Timothy Cooley', 'Williams', 'lcastillo@example.com', '1329 Kelly Curve Suite 730
+Mariabury, NM 90035', 'Jenniferburgh', 'Hawaii');
+INSERT INTO Customers (first_name, last_name, email, address, city, zip) VALUES ('Timothy Cooley', 'Williams', 'lcastillo@example.com', '1329 Kelly Curve Suite 730
+Mariabury, NM 90035', 'Jenniferburgh', '07537');
 
+
+select * from Customers;
 
 INSERT INTO Customers (first_name, last_name, email, address, city, state, zip) VALUES
 ('John', 'Doe', 'john.doe@example.com', '123 Main St', 'New York', 'NY', '10001'),
@@ -348,7 +354,13 @@ Select DISTINCT first_name from Customers;
 
 -- Display data where first name is JOHN
 Select *  from Customers
-	where first_name = "John";
+	where first_name IN ("John","Jane");
+    
+Select * from Customers
+		where customer_id > 20;
+        
+Select * from Orders
+		where order_date = "2023-01-08";    
 
 
 -- Display Unique emails of JOHN
@@ -359,38 +371,98 @@ Select DISTINCT email  from Customers
 -- Sorting data and limiting output
     
 Select * from Customers
-order by first_name,last_name asc
-limit 5;
+order by first_name desc
+limit 2;
     
 
+-- Display data using AND(BOTH Conditions should be TRUE) in WHERE Condition
+
+Select * from Customers
+	where first_name = "John" and
+	zip = "12345";
+
+-- Display data using OR(Any one Conditions should be TRUE) in WHERE Condition
+
+Select * from Customers
+	where first_name = "John" or
+	zip = "12345";
+
+-- Exception(Leaving Out) of rows from the table
+Select * from Customers
+	where not first_name = "John";
+
+
+-- Find Null Value rows
+Select * from Customers
+	where state is null;
+
+-- Find not Null Value rows
+Select * from Customers
+	where state is not null;
+    
+    
+-- Update values in the table
+
+UPDATE Customers
+SET first_name = 'Tonie'
+WHERE customer_id=3;
+    
+-- Update values in multiple columns in the table
+
+UPDATE Customers
+SET first_name = 'Tonie',
+	last_name = "Bhai"
+WHERE customer_id=3;
+
+
+
+Select * from Order_Items;
+
+
+-- Deleting a row from a table
+
+Delete from Order_Items
+WHERE order_item_id=100;
+
+
+
+Select * from customers;
+Select * from orders;
+Select * from order_items;
+Select * from books;
+
+-- Aggregate Functions without/WITH any conditions
+
+select Min(total_amount) as Least_Priced_book 
+from orders;
 
 
 
 
 
+select Max(total_amount) as Max_Priced_book 
+from orders;
 
 
 
 
 
+select Sum(total_amount) as Sum_of_books 
+from orders;
 
 
 
 
 
+select Avg(total_amount) as Avg_Price_of_book 
+from orders;
 
 
 
 
 
-
-
-
-
-
-
-
-
+select Count(total_amount) as Total_no_of_Books 
+from orders;
 
 
 
